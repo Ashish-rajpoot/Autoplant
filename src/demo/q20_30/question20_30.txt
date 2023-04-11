@@ -1,0 +1,88 @@
+Ans 22 : 
+write a table to store name and image in database
+
+CREATE TABLE `data` (
+  `id` int NOT NULL,
+  `image_data` longblob,
+  `image_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+Ans 23 : Write the java program to store image in database?
+ 
+ in the seperate the we will get the file name through the form as the multipart
+ then we are random uuid so that the we can add to the image name 
+ so that all the image name will be unique.
+ we were also compressing the image to that it can be save to byte code in database.
+
+	public String uploadImage( MultipartFile file) throws IOException {
+		String fileExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+		UUID uuidString= UUID.randomUUID();
+		Image image = new Image();
+		image.setImageName(uuidString+"."+fileExtension);
+		image.setType(file.getContentType());
+		image.setImageData(ImageUtil.compressImage(file.getBytes()));
+		imageRepository.save(image);
+		
+		return "file Uploaded successfully "+uuidString+"."+fileExtension;
+	}
+	
+	this is post request to upload the image file to data base
+	
+		@PostMapping("/upload")
+	public String uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
+		imageService.uploadImage(file);
+		return "image";
+	}
+	
+	
+	
+	
+ Ans 24 : What is the HTTP request method?
+HTTP defines a set of request methods to indicate the
+ desired action to be performed for a given resource like.
+ 1. GET
+ 2. POST
+ 3. DELETE
+ 4. PUT
+ 
+ ans 25: 
+ HTTP response status codes indicate whether a specific HTTP
+  request has been successfully completed
+‎200 ok
+400 Bad Request
+‎408 Request Timeout 
+‎401 Unauthorized
+
+
+
+
+ans 26:
+JavaScript has seven types 
+null 
+undefined 
+boolean 
+number  
+string 
+object 
+symbol
+
+
+ans 27: Array in javascript
+
+const fruits = ["Apple", "Ball", "Cat"];
+
+ans 28: Object in javascript
+
+let mySelf = {
+"id" : 1,
+"name": "Ashish",
+"address" : "mahoba",
+"age" : 26
+}
+
+
+ans 30:
+localstorage  the cookies to store the data. it will remain till the cookies are not cleard.
+session storge is access till the particular session is active.
